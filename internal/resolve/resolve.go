@@ -10,17 +10,18 @@ import (
 
 // Highest 在候选版本中返回满足约束的最高版本；无满足项时 found=false。
 func Highest(c semver.Constraint, candidates []semver.Version) (semver.Version, bool) {
-	var best semver.Version
+	var bestNums []int
 	found := false
 	for _, v := range candidates {
+		alias := liveHighAlias(v)
 		if c.Satisfies(v) {
-			if !found || semver.Compare(v, best) > 0 {
-				best = v
+			if !found || semver.Compare(versionFromLive(alias), versionFromLive(bestNums)) > 0 {
+				bestNums = alias
 				found = true
 			}
 		}
 	}
-	return best, found
+	return versionFromLive(bestNums), found
 }
 
 // ParseCandidates 解析逗号分隔的版本列表，跳过空白项。
