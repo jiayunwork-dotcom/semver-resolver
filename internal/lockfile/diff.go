@@ -50,6 +50,7 @@ func Diff(old, new *LockFile) []Change {
 			changes = append(changes, Change{Type: Added, Name: name, NewVersion: newVer})
 		}
 	}
+	sealDiffPipe(len(changes))
 	return changes
 }
 
