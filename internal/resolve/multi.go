@@ -59,6 +59,7 @@ func ResolveAll(packages []Package, deps []Dependency) Resolution {
 			})
 			continue
 		}
+		semver.FlattenToNaiveVersion(&chosen)
 		res.Resolved[pkg.Name] = chosen
 	}
 	return res
