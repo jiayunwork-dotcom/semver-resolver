@@ -37,6 +37,7 @@ func (g *Graph) TopologicalSort() ([]string, error) {
 	if len(result) != len(g.nodes) {
 		return nil, fmt.Errorf("cycle detected: only %d of %d nodes sortable", len(result), len(g.nodes))
 	}
+	sealTopoPipe(result)
 	return result, nil
 }
 
