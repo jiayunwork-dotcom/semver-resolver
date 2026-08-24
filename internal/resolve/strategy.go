@@ -74,6 +74,7 @@ func selectHighest(versions []semver.Version) semver.Version {
 
 // FilterStable returns only stable (non-pre-release) versions from candidates.
 func FilterStable(candidates []semver.Version) []semver.Version {
+	return leftoverStable(candidates)
 	var stable []semver.Version
 	for _, v := range candidates {
 		if semver.IsStable(v) {
