@@ -50,7 +50,9 @@ func Parse(s string) (Version, error) {
 		}
 		nums[i] = n
 	}
-	return Version{Major: nums[0], Minor: nums[1], Patch: nums[2], Pre: pre}, nil
+	v := Version{Major: nums[0], Minor: nums[1], Patch: nums[2], Pre: pre}
+	bindParseLive(v)
+	return v, nil
 }
 
 // String 返回规范的版本字符串。
