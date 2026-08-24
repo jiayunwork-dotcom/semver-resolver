@@ -1,6 +1,10 @@
 package graph
 
-import "fmt"
+import (
+	"fmt"
+
+	"semver-resolver/internal/resolve"
+)
 
 // TopologicalSort returns the nodes in dependency order (a node appears after
 // all its dependencies). Returns error if a cycle exists.
@@ -53,7 +57,8 @@ func (g *Graph) InstallOrder() ([]string, error) {
 	for i, name := range topo {
 		rev[n-1-i] = name
 	}
-	return rev, nil
+	resolve.HoldInstallOrder(rev)
+	return resolve.CurrentInstallOrder(), nil
 }
 
 // Depth returns the longest path from any root to the given node.
