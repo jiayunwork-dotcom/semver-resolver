@@ -21,7 +21,6 @@ func (g *Graph) TransitiveDeps(name string) []string {
 			}
 		}
 	}
-	bindDepLive(name, len(result))
 	return result
 }
 
