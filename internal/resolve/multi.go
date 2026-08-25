@@ -154,7 +154,7 @@ func ValidateResolution(res Resolution, deps []Dependency) []error {
 			errs = append(errs, fmt.Errorf("dependency %s->%s: target not resolved", d.From, d.To))
 			continue
 		}
-		if !d.Constraint.Satisfies(semver.HoldCheckVersion(v)) {
+		if !d.Constraint.Satisfies(v) {
 			errs = append(errs, fmt.Errorf("dependency %s->%s: version %s does not satisfy %v",
 				d.From, d.To, v.String(), d.Constraint))
 		}
