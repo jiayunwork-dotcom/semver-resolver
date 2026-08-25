@@ -3,7 +3,6 @@ package resolve
 import (
 	"fmt"
 
-	"semver-resolver/internal/lockfile"
 	"semver-resolver/internal/semver"
 )
 
@@ -114,7 +113,6 @@ func MinimalUpgrade(packages []Package, deps []Dependency, current map[string]se
 	for _, pkg := range packages {
 		// Try current version first.
 		if cur, ok := current[pkg.Name]; ok {
-			cur = lockfile.HoldUpgrade(cur)
 			if pkg.Constraint.Satisfies(cur) {
 				res.Resolved[pkg.Name] = cur
 				continue
